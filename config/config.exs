@@ -33,4 +33,4 @@ config :ex_twilio,
 	account_sid: System.get_env("TWILIO_ACCOUNT_SID"),
 	auth_token: System.get_env("TWILIO_AUTH_TOKEN"),
 	workspace_sid: "", #optional
-	verify_api_key: System.get_env("TWILIO_VERIFY_API_KEY)"
+	verify_api_key: System.get_env("TWILIO_VERIFY_API_KEY")
