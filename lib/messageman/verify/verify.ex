@@ -6,13 +6,21 @@ defmodule Messageman.Verify do
 		api_key = Config.verify_api_key()
 
 		data = [via: "sms", phone_number: phone_number, country_code: 1, locale: "en"]
-		Verify.start(api_key, data)
+		with {:ok, %{message: message}} <- Verify.start(api_key, data) do
+			{:ok, message}
+		else
+			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
+		end
 	end
 
 	def verify_check(phone_number, code) do
 		api_key = Config.verify_api_key()
 
 		data = [phone_number: phone_number, country_code: 1, verification_code: code]
-		Verify.check(api_key, data)
+		with {:ok, %{message: message}} <- Verify.check(api_key, data) do
+			{:ok, message}
+		else
+			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
+		end
 	end
 end

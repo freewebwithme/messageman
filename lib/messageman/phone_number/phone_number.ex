@@ -10,8 +10,8 @@ defmodule Messageman.PhoneNumber do
 		{account, token} = Config.get_credential_info()
 		data = [AreaCode: area_code]
 		options = [account: account, token: token]
-		with {:ok, %{sid: phone_sid}} <- IncomingPhoneNumber.create(data, options) do
-			phone_sid
+		with {:ok, phone_number} <- IncomingPhoneNumber.create(data, options) do
+			phone_number
 		else
 			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
 		end
