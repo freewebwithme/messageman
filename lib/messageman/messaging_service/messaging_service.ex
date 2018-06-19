@@ -1,5 +1,5 @@
 defmodule Messageman.MessagingService do
-	alias ExTwilio.Services.{ Service, PhoneNumbers, AlphaSenderId }
+	alias ExTwilio.Services.{ Service, AlphaSenderId }
 	alias Messageman.Config
 
 	defstruct [ :account_sid,
@@ -35,20 +35,7 @@ defmodule Messageman.MessagingService do
 		end
 	end
 
-	@doc """
-	 Add phone number to messaging service
-	"""
 
-	def add_phone_number_to_messaging_service(phone_sid, messaging_sid) do
-		{account, token} = Config.get_credential_info()
-		phone_number_sid = [PhoneNumberSid: phone_sid]
-		options = [account: account, token: token]
-		with { :ok, [%{ phone_number: phone_number }] } <- PhoneNumbers.add(phone_number_sid, messaging_sid, options) do
-			phone_number
-		else
-			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
-		end
-	end
 
 	@doc """
 	Add Alpha Sender Id to Messaging Service
