@@ -3,7 +3,8 @@ defmodule Messageman.Application do
 
   def start(_type, _args) do
     children = [
-      {Messageman.Server, nil}
+     # {Messageman.Server, nil}
+     {Task.Supervisor, name: Messageman.TaskSupervisor}
     ]
 
     opts = [strategy: :one_for_one, name: Messageman.Supervisor ]

@@ -23,12 +23,12 @@ defmodule Messageman.MessagingService do
 	"""
 
 	#TODO: Add status callback
-	def create_messaging_service(account, token, friendly_name) do
+	def create_messaging_service(account, token, friendly_name, inbound_request_url) do
 		# name = [FriendlyName: friendly_name, StatusCallback: status_callback]
-		name = [FriendlyName: friendly_name]
+		params = [FriendlyName: friendly_name, InboundRequestUrl: inbound_request_url]
 		options = [account: account, token: token]
 
-		with { :ok, %{sid: messaging_service_sid} } <- Service.create(name, options) do
+		with { :ok, %{sid: messaging_service_sid} } <- Service.create(params, options) do
 			messaging_service_sid
 		else
 			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
