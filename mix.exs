@@ -5,6 +5,11 @@ defmodule Messageman.Mixfile do
     [
       app: :messageman,
       version: "0.1.0",
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
+
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps()
@@ -24,8 +29,8 @@ defmodule Messageman.Mixfile do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      # {:ex_twilio, [path: "../ex_twilio"]},
-      {:ex_twilio, github: "wlminimal/ex_twilio", branch: "messageman"}
+      {:ex_twilio, in_umbrella: true},
+      # {:ex_twilio, github: "wlminimal/ex_twilio", branch: "messageman"}
     ]
   end
 end
