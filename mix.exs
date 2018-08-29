@@ -29,8 +29,8 @@ defmodule Messageman.Mixfile do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
-      {:ex_twilio, in_umbrella: true},
-      # {:ex_twilio, github: "wlminimal/ex_twilio", branch: "messageman"}
+      # {:ex_twilio, in_umbrella: true},
+      {:ex_twilio, github: "wlminimal/ex_twilio", branch: "messageman"}
     ]
   end
 end
