@@ -18,7 +18,7 @@ defmodule Messageman.IncomingPhoneNumber do
 
 	def release_phone_number(phone_sid, account, token) do
 		options = [account: account, token: token]
-		with {:ok, _map} <- IncomingPhoneNumber.destroy(phone_sid, options) do
+		with :ok <- IncomingPhoneNumber.destroy(phone_sid, options) do
 			{:ok, "Phone number is deleted from your account."}
 		else
 			{ :error, reason, http_status_code } -> { :error, reason, http_status_code }
