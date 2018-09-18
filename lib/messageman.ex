@@ -4,6 +4,7 @@ defmodule Messageman do
   alias Messageman.MessagingSerivce.PhoneNumber, as: MessagingServicePhoneNumber
   alias Messageman.Sms
   alias Messageman.Mms
+  alias Messageman.Lookup
 
   # SMS
   defdelegate send_sms(to_number, body, from_number, status_callback, account, token), to: Sms
@@ -34,4 +35,8 @@ defmodule Messageman do
 
   defdelegate verify_start(phone_number), to: Verify
   defdelegate verify_check(phone_number, code), to: Verify
+
+  # Lookup phonenumber
+  defdelegate is_mobile_number?(phone_number), to: Lookup
+  defdelegate is_landline_number?(phone_number), to: Lookup
 end
