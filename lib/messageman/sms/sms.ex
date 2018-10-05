@@ -4,11 +4,17 @@ defmodule Messageman.Sms do
 	@doc """
 	Send SMS using 1 phone number
 	"""
-	@spec send_sms(list, String.t, String.t, String.t, String.t, String.t) :: map
-	def send_sms(phone_numbers, body, from_number, status_callbkac, account, token) do
+	def send_sms(phone_numbers, body, from_number, status_callback, account, token) do
 		phone_numbers
-		|> Enum.map(&Message.create_message(&1, body, from_number, status_callbkac,account, token))
-		|> Enum.group_by(&elem(&1, 0))
+		|> Enum.map(&Message.create_message(&1, body, from_number, status_callback, account, token))
+		# |> Enum.group_by(&elem(&1, 0))
+	end
+
+	def send_sms_async(phone_numbers, body, from_number, status_callback, account, token) do
+		Task.Supervisor.async_stream(Messageman.TaskSupervisor, phone_numbers, Messageman.Sms.Message, :create_message,
+		[body, from_number, status_callback, account, token], [max_concurrency: 20])
+		|> Enum.to_list()
+		|> extracting_message()
 	end
 
 	@doc """
